@@ -43,11 +43,19 @@ jobs:
         with:
           path: installers
           merge-multiple: true
+      - name: Ensure release exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" \
+              --title "Python 符文纪事 $TAG" \
+              --notes "32 关、160 道知识试炼的 Python 教学像素 RPG。macOS DMG 将在本地签名、公证服务恢复后补充发布。"
       - env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.ref_name }}
         run: |
-          gh release create "$TAG" installers/* \
+          gh release upload "$TAG" installers/* \
             --repo "$GITHUB_REPOSITORY" \
-            --title "Python 符文纪事 $TAG" \
-            --notes "32 关、160 道题目的 Python 教学像素 RPG。下载 macOS DMG、Windows EXE、Ubuntu DEB 和 Linux RPM。macOS 安装包由研发者另行签名、公证并上传。"
+            --clobber
