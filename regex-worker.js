@@ -1,0 +1,1 @@
+self.onmessage=({data})=>{try{const re=new RegExp(data.pattern,'g');self.postMessage({matches:Array.from(data.text.matchAll(re),m=>m[0]).slice(0,100)});}catch(e){self.postMessage({error:e.message});}};

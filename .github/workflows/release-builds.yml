@@ -1,0 +1,53 @@
+name: Build release installers
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: windows
+          - os: ubuntu-latest
+            target: linux
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Build Windows NSIS installer
+        if: matrix.target == 'windows'
+        run: npx electron-builder --win nsis --x64
+      - name: Build Ubuntu DEB and RPM installers
+        if: matrix.target == 'linux'
+        run: npx electron-builder --linux deb rpm --x64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installers-${{ matrix.target }}
+          path: release/*
+          if-no-files-found: error
+          retention-days: 30
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: installers
+          merge-multiple: true
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$TAG" installers/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Python 符文纪事 $TAG" \
+            --notes "32 关、160 道题目的 Python 教学像素 RPG。下载 macOS DMG、Windows EXE、Ubuntu DEB 和 Linux RPM。macOS 安装包由研发者另行签名、公证并上传。"

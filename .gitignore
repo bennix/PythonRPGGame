@@ -1,0 +1,11 @@
+node_modules/
+dist/
+release/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.p12
+*.p8
+AuthKey_*.p8
+*.mobileprovision

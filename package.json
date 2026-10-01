@@ -1,0 +1,77 @@
+{
+  "name": "python-rune-quest",
+  "version": "1.0.0",
+  "description": "A 32-stage pixel adventure that teaches Python in Chinese.",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "npm run build && electron .",
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build --base ./",
+    "test": "node --test tests/*.test.cjs",
+    "dist": "npm run build && electron-builder",
+    "dist:mac": "npm run build && electron-builder --mac dmg --arm64",
+    "dist:win": "npm run build && electron-builder --win nsis --x64",
+    "dist:linux": "npm run build && electron-builder --linux deb rpm --x64"
+  },
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "electron-builder": "^26.0.12",
+    "vite": "^7.1.0"
+  },
+  "build": {
+    "appId": "edu.fudan.pythonrunequest",
+    "productName": "Python符文纪事",
+    "files": [
+      "dist/**/*",
+      "main.cjs",
+      "package.json",
+      "assets/app-icon.png"
+    ],
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/app-icon.icns",
+      "identity": "Developer ID Application: ZHIPING XU (5N66S29EK2)",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": true,
+      "entitlements": "assets/entitlements.mac.plist",
+      "entitlementsInherit": "assets/entitlements.mac.plist",
+      "artifactName": "PythonRPGGame-${version}-macOS-arm64.${ext}"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/app-icon.ico",
+      "artifactName": "PythonRPGGame-${version}-Windows-x64.${ext}"
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "rpm"
+      ],
+      "icon": "assets/app-icon.png",
+      "artifactName": "PythonRPGGame-${version}-${ext}-x64.${ext}",
+      "category": "Education",
+      "synopsis": "A pixel-art adventure for learning Python",
+      "maintainer": "zpxu@fudan.edu.cn",
+      "desktop": {
+        "entry": {
+          "Name": "Python Rune Quest",
+          "Comment": "Learn Python in an illustrated pixel adventure",
+          "Categories": "Education;Game;"
+        }
+      }
+    },
+    "icon": "assets/app-icon.png",
+    "directories": {
+      "output": "release",
+      "buildResources": "assets"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "type": "module",
+  "author": "徐志平 · 复旦大学计算与智能创新学院 · 2026"
+}
