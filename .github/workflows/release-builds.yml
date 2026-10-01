@@ -56,6 +56,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.ref_name }}
         run: |
-          gh release upload "$TAG" installers/* \
+          gh release upload "$TAG" installers/*.exe installers/*.deb installers/*.rpm \
             --repo "$GITHUB_REPOSITORY" \
             --clobber
