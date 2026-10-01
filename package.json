@@ -21,6 +21,7 @@
   "build": {
     "appId": "edu.fudan.pythonrunequest",
     "productName": "Python符文纪事",
+    "electronLanguages": ["en-US", "zh-CN"],
     "files": [
       "dist/**/*",
       "main.cjs",
@@ -32,6 +33,7 @@
       "icon": "assets/app-icon.icns",
       "hardenedRuntime": true,
       "gatekeeperAssess": true,
+      "timestamp": "http://timestamp.apple.com/ts01",
       "entitlements": "assets/entitlements.mac.plist",
       "entitlementsInherit": "assets/entitlements.mac.plist",
       "artifactName": "PythonRPGGame-${version}-macOS-arm64.${ext}"
