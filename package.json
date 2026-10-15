@@ -21,7 +21,10 @@
   "build": {
     "appId": "edu.fudan.pythonrunequest",
     "productName": "Python符文纪事",
-    "electronLanguages": ["en-US", "zh-CN"],
+    "electronLanguages": [
+      "en-US",
+      "zh-CN"
+    ],
     "files": [
       "dist/**/*",
       "main.cjs",
@@ -74,5 +77,6 @@
     }
   },
   "type": "module",
-  "author": "徐志平 · 复旦大学计算与智能创新学院 · 2026"
+  "author": "徐志平 · 复旦大学计算与智能创新学院 · 2026",
+  "license": "GPL-3.0-only"
 }
