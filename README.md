@@ -1,5 +1,10 @@
 # Python 符文纪事 · Python Rune Quest
 
+> **License / 许可:** Original code authored by bennix: **GPL-3.0-only**.
+> Upstream and third-party material retain their original terms and notices.
+> See [LICENSE](LICENSE) and [LICENSING.md](LICENSING.md) for the current licensing scope.
+
+
 **把 Python 程序设计变成一段 32 关的像素冒险。**勇者与巫师赛勒斯追踪学徒艾琳的线索，在每关五道 Python 试炼中集齐符文，解开恶龙诺克斯的诅咒。
 
 **研发：徐志平 · 复旦大学计算与智能创新学院 · 2026**  
